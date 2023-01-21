@@ -4,17 +4,19 @@ import { computed, toRefs } from "vue";
 const props = defineProps<{
   placeholder?: string;
   modelValue: string;
-  errorMessage?: string;
+  errorMessages?: {
+    $message: string;
+  }[];
   isError?: boolean;
 }>();
 const emit = defineEmits<{
   (e: "update:modelValue", modelValue: string): void;
 }>();
 
-const { isError, errorMessage, placeholder, modelValue } = toRefs(props);
+const { isError, errorMessages, placeholder, modelValue } = toRefs(props);
 
 const showErrorMessage = computed(
-  () => !!isError?.value && !!errorMessage?.value
+  () => !!isError?.value && !!errorMessages?.value
 );
 </script>
 
@@ -27,9 +29,17 @@ const showErrorMessage = computed(
       :placeholder="placeholder"
       @input="emit('update:modelValue', $event.target.value)"
     />
-    <div class="errorMessage" v-if="showErrorMessage">
-      {{ errorMessage }}
-    </div>
+    <template v-if="showErrorMessage">
+      <div
+        class="errorMessages"
+        v-for="errorMessage of errorMessages"
+        :key="errorMessage.$message"
+      >
+        <div class="errorMessage">
+          {{ errorMessage.$message }}
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -64,12 +74,20 @@ const showErrorMessage = computed(
   color: #eb001b;
 }
 
+.errorMessages {
+  margin-top: 13px;
+  margin-left: 31px;
+}
+
+.errorMessages:not(:last-child) {
+  margin-bottom: 10px;
+}
+
 .errorMessage {
+  margin-bottom: 10px;
   font-weight: 400;
   font-size: 18px;
   line-height: 21px;
   color: #eb001b;
-  margin-top: 13px;
-  margin-left: 31px;
 }
 </style>

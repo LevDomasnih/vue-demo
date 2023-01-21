@@ -1,5 +1,5 @@
 import { BaseService } from "@/services/base.service";
-import type { AxiosError, AxiosResponse } from "axios";
+import type { AxiosResponse } from "axios";
 import { isAxiosError } from "axios";
 
 interface LoginData {
@@ -42,8 +42,6 @@ export class AuthService {
           login,
           password,
         });
-
-      this.base.setHeaderToken(data);
       return {
         token: data,
       };
@@ -57,5 +55,7 @@ export class AuthService {
     }
   }
 
-  logout() {}
+  async logout() {
+    await this.base.getAxiosClient().post("/logout");
+  }
 }

@@ -9,7 +9,7 @@ interface AxiosInstanceConfigureType {
 
 export class BaseService {
   private static instance: BaseService;
-  private axiosClient: AxiosInstance;
+  private readonly axiosClient: AxiosInstance;
 
   private constructor() {
     this.axiosClient = axios.create();
@@ -38,7 +38,7 @@ export class BaseService {
   }
 
   setHeaderToken(userToken: string = "") {
-    this.axiosClient.defaults.headers.common.Authorization = `Bearer ${userToken}`;
+    this.axiosClient.defaults.headers.common['auth-token'] = `Bearer ${userToken}`;
   }
 
   getAxiosClient() {

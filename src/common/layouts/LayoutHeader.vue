@@ -1,14 +1,14 @@
 <script setup>
-import { ref } from "vue";
+import { useAuthStore } from "@/stores/useAuthStore";
 
-const isLogin = ref(false);
+const authStore = useAuthStore();
 </script>
 
 <template>
   <header class="header">
-    <div :class="['wrapper', 'spaceBetween']" v-if="isLogin">
+    <div :class="['wrapper', 'spaceBetween']" v-if="authStore.isAuth">
       <img src="../../assets/images/logo.svg" alt="Skillspace" />
-      <button class="signIn">
+      <button class="signIn" @click="authStore.logout()">
         <img
           src="../../assets/images/sign-in.svg"
           class="signInIcon"
@@ -30,6 +30,7 @@ const isLogin = ref(false);
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
+
 .wrapper {
   padding: 0 135px;
   display: flex;
@@ -37,14 +38,17 @@ const isLogin = ref(false);
   width: 100%;
   height: 100%;
 }
+
 .centered {
   display: flex;
   justify-content: center;
 }
+
 .spaceBetween {
   display: flex;
   justify-content: space-between;
 }
+
 .signIn {
   font-weight: 700;
   font-size: 17px;
@@ -54,6 +58,7 @@ const isLogin = ref(false);
   display: flex;
   align-items: center;
 }
+
 .signInIcon {
   margin-right: 12px;
   width: 20px;
