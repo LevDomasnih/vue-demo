@@ -7,7 +7,17 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
+      path: "/space",
+      name: "Space",
+      component: Space,
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: Login,
+    },
+    {
+      path: "/:pathMatch(.*)*",
       redirect: () => {
         const authStore = useAuthStore();
         if (!authStore.isAuth) {
@@ -19,16 +29,6 @@ const router = createRouter({
           path: "/space",
         };
       },
-    },
-    {
-      path: "/space",
-      name: "Space",
-      component: Space,
-    },
-    {
-      path: "/login",
-      name: "Login",
-      component: Login,
     },
   ],
 });

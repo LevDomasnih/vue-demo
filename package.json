@@ -13,12 +13,14 @@
   "dependencies": {
     "@vuelidate/core": "^2.0.0",
     "@vuelidate/validators": "^2.0.0",
+    "date-fns": "^2.29.3",
     "pinia": "^2.0.28",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
+    "@types/date-fns": "^2.6.0",
     "@types/node": "^18.11.12",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",

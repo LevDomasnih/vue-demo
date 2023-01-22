@@ -1,12 +1,43 @@
+<template>
+  <div class="login">
+    <div class="heading">Облачное хранилище</div>
+    <div class="wrapper">
+      <div class="text">
+        Введите свою почту и пароль, чтобы начать работу в облачном хранилище
+      </div>
+      <form @submit.prevent="onSubmit">
+        <div class="inputs">
+          <ui-input
+            class="firstInput"
+            placeholder="Введите вашу почту"
+            v-model="vv.email.$model"
+            :error-messages="vv.email.$errors"
+            :is-error="!!vv.email.$errors.length"
+          />
+          <ui-input
+            placeholder="Введите ваш пароль"
+            v-model="vv.password.$model"
+            :error-messages="vv.password.$errors"
+            :is-error="!!vv.password.$errors.length"
+          />
+        </div>
+        <div class="buttonWrapper">
+          <ui-button :disabled="disabledButton" type="submit">Войти</ui-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import UiInput from "@/common/ui/UiInput.vue";
 import { computed, reactive, watch } from "vue";
-import UiButton from "@/common/ui/UiButton.vue";
 import { helpers, required } from "@vuelidate/validators";
 import type { ValidationRuleWithParams } from "@vuelidate/core";
 import useVuelidate from "@vuelidate/core";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { storeToRefs } from "pinia";
+import UiButton from "@/common/ui/UiButton.vue";
 
 interface Rules {
   email: {
@@ -87,37 +118,6 @@ const onSubmit = async () => {
   wrong.password = state.password;
 };
 </script>
-
-<template>
-  <div class="login">
-    <div class="heading">Облачное хранилище</div>
-    <div class="wrapper">
-      <div class="text">
-        Введите свою почту и пароль, чтобы начать работу в облачном хранилище
-      </div>
-      <form @submit.prevent="onSubmit">
-        <div class="inputs">
-          <ui-input
-            class="firstInput"
-            placeholder="Введите вашу почту"
-            v-model="vv.email.$model"
-            :error-messages="vv.email.$errors"
-            :is-error="!!vv.email.$errors.length"
-          />
-          <ui-input
-            placeholder="Введите ваш пароль"
-            v-model="vv.password.$model"
-            :error-messages="vv.password.$errors"
-            :is-error="!!vv.password.$errors.length"
-          />
-        </div>
-        <div class="buttonWrapper">
-          <ui-button :disabled="disabledButton" type="submit">Войти</ui-button>
-        </div>
-      </form>
-    </div>
-  </div>
-</template>
 
 <style scoped>
 .login {

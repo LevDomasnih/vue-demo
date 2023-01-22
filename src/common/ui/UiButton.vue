@@ -1,3 +1,14 @@
+<template>
+  <button
+    :type="type"
+    class="button"
+    :class="[`size-${size}`]"
+    :disabled="disabled"
+  >
+    <slot></slot>
+  </button>
+</template>
+
 <script setup lang="ts">
 import { toRefs } from "vue";
 
@@ -14,17 +25,6 @@ const props = withDefaults(defineProps<Props>(), {
 });
 const { size } = toRefs(props);
 </script>
-
-<template>
-  <button
-    :type="type"
-    class="button"
-    :class="[`size-${size}`]"
-    :disabled="disabled"
-  >
-    <slot></slot>
-  </button>
-</template>
 
 <style scoped>
 .button {

@@ -1,14 +1,8 @@
-<script setup>
-import { useAuthStore } from "@/stores/useAuthStore";
-
-const authStore = useAuthStore();
-</script>
-
 <template>
   <header class="header">
     <div :class="['wrapper', 'spaceBetween']" v-if="authStore.isAuth">
       <img src="../../assets/images/logo.svg" alt="Skillspace" />
-      <button class="signIn" @click="authStore.logout()">
+      <button class="signIn" @click="authStore.logout()" name="sign-in">
         <img
           src="../../assets/images/sign-in.svg"
           class="signInIcon"
@@ -22,6 +16,12 @@ const authStore = useAuthStore();
     </div>
   </header>
 </template>
+
+<script setup>
+import { useAuthStore } from "@/stores/useAuthStore";
+
+const authStore = useAuthStore();
+</script>
 
 <style scoped>
 .header {

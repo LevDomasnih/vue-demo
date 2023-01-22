@@ -1,25 +1,3 @@
-<script setup lang="ts">
-import { computed, toRefs } from "vue";
-
-const props = defineProps<{
-  placeholder?: string;
-  modelValue: string;
-  errorMessages?: {
-    $message: string;
-  }[];
-  isError?: boolean;
-}>();
-const emit = defineEmits<{
-  (e: "update:modelValue", modelValue: string): void;
-}>();
-
-const { isError, errorMessages, placeholder, modelValue } = toRefs(props);
-
-const showErrorMessage = computed(
-  () => !!isError?.value && !!errorMessages?.value
-);
-</script>
-
 <template>
   <div class="inputWrapper">
     <input
@@ -42,6 +20,28 @@ const showErrorMessage = computed(
     </template>
   </div>
 </template>
+
+<script setup lang="ts">
+import { computed, toRefs } from "vue";
+
+const props = defineProps<{
+  placeholder?: string;
+  modelValue: string;
+  errorMessages?: {
+    $message: string;
+  }[];
+  isError?: boolean;
+}>();
+const emit = defineEmits<{
+  (e: "update:modelValue", modelValue: string): void;
+}>();
+
+const { isError, errorMessages, placeholder, modelValue } = toRefs(props);
+
+const showErrorMessage = computed(
+  () => !!isError?.value && !!errorMessages?.value
+);
+</script>
 
 <style scoped>
 .inputWrapper {
