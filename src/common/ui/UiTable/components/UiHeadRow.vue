@@ -13,13 +13,11 @@
       :class="{ firstChild: index === 0 }"
       scope="col"
     >
-      <button
-        class="headerSort"
-        @click="emits('sorter', column.key, column.sortedByASC)"
-      >
+      <button class="headerSort" @click="emits('change-sort', column.key)">
         <div>{{ column.title }}</div>
         <img
-          :class="{ asc: column.sortedByASC }"
+          v-show="sortFieldKey === column.key"
+          :class="{ asc: !sortedByAsc }"
           class="arrow-sort"
           src="src/assets/images/arrow.svg"
           alt="sort"
@@ -39,6 +37,8 @@ interface Props {
   withActions: boolean;
   checkAll: boolean;
   columns: TableColumnsInterface[];
+  sortedByAsc: boolean;
+  sortFieldKey: string | null;
 }
 withDefaults(defineProps<Props>(), {
   withActions: true,
@@ -46,7 +46,7 @@ withDefaults(defineProps<Props>(), {
   checkAll: false,
 });
 const emits = defineEmits<{
-  (e: "sorter", columnKey: string, sortedByAsc: boolean): void;
+  (e: "change-sort", columnKey: string): void;
   (e: "change-check-all", checked: boolean): void;
 }>();
 </script>
@@ -91,8 +91,5 @@ th:not(.checkbox) {
 }
 .arrow-sort.asc {
   transform: rotate(180deg);
-}
-.arrow-sort.desc {
-  transform: rotate(0deg);
 }
 </style>

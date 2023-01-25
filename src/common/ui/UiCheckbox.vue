@@ -24,8 +24,6 @@ input {
 input:after {
   content: "\00D7";
   display: block;
-  background: white;
-  background-image: url("../../assets/images/check.svg");
   cursor: pointer;
   font-size: 30px;
   position: absolute;
@@ -37,8 +35,7 @@ input:after {
   transition: 0.25s all ease-in-out;
   border-radius: 3px;
   line-height: 30px;
-  background-position: 0 0;
-  background-repeat: no-repeat;
+  background: white url("../../assets/images/check.svg") no-repeat 0 0;
   background-size: 26px 26px;
   border-width: 3px;
   border-style: solid;

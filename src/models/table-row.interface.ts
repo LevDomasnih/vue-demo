@@ -1,7 +1,6 @@
-export interface TableRowInterface {
-  key: string;
+export interface TableRowInterface<T = { [key: string]: any }> {
+  key: string | number;
   active?: boolean;
-  data: {
-    [key: string]: string | number;
-  };
+  isError?: boolean;
+  data: T;
 }

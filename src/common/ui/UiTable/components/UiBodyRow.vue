@@ -12,9 +12,10 @@
       class="dataCell"
       :class="{ firstChild: index === 0 }"
     >
-      <div v-if="columns.find((c) => c.key === key).render">
-        {{ columns.find((c) => c.key === key).render(value) }}
-      </div>
+      <div
+        v-if="columns.find((c) => c.key === key).render"
+        v-html="columns.find((c) => c.key === key).render(value)"
+      ></div>
       <div v-else>{{ value }}</div>
     </td>
     <td class="actions" v-if="withActions">
@@ -45,7 +46,7 @@ withDefaults(defineProps<Props>(), {
   hasError: false,
 });
 const emits = defineEmits<{
-  (e: "change-check", key: string, value: boolean): void;
+  (e: "change-check", key: string | number, value: boolean): void;
 }>();
 </script>
 
@@ -86,5 +87,6 @@ tr td:not(.checkbox) {
 .checkbox {
   width: 72px;
   text-align: center;
+  transition: all 0.2s ease-out;
 }
 </style>
